@@ -1,44 +1,48 @@
 #include "linea2argv.h"
 
+#define MAXLINE 1024
+
 #include <string.h>
 #include <ctype.h>
 
-int linea2argv(char *linea, __attribute__((unused)) int argc, char **argv)
-{
-    int pos_argv = 0;
-    int word = 1;
-    char *punt_line = NULL;
-    punt_line = strdup(linea);
-
-    while (*punt_line != '\n')
-    {
-        if ((isspace(*punt_line) || *punt_line == '\t') && word == 0)
-        {
-            word = 1; // no estas en la palabra
-            pos_argv++;
-            *punt_line = '\0';
-        }
-
-        else if(*punt_line == '"' && word ==1){    // Aca empieza la parte de las comillas
-            punt_line++;
-            word = 0;
-            while (*punt_line != '"')
-            {
-                argv[pos_argv] = punt_line;
-                punt_line++;
-            }    
-        }                                         // Aca termina la parte de las comillas
-
-        else if (*punt_line != ' ' && word == 1)
-        {
-            word = 0;
-            argv[pos_argv] = punt_line;
-        }
-        punt_line++;
+int linea2argv(char *linea, int argc, char **argv){
+    
+    for(int i =0; argv[i] != NULL; i++){
+        free(argv[i]);
+        argv[i];
     }
 
-    *punt_line = '\0';
-    pos_argv++;
-    argv[pos_argv] = NULL;
-    return pos_argv;
+    int i = 0,j = 0,k = 0;
+    char word[MAXLINE];
+    for(;isspace(linea[i]);i++){
+            ;
+        }
+    while(linea[i] != '\0'){
+        if (linea[i] == '"'){
+            i++;    //salteo la comilla de apertura
+            for(j = 0;  linea[i] != '"' && k<argc; i++,j++){
+                word[j] = linea[i];
+            }
+            i++;    //salteo la comilla de cierre
+        }
+        else if (linea[i] == "'" ){
+            i++;    //salteo la comilla de apertura
+            for(j = 0; linea[i] != "'" && k<argc; i++,j++){
+                word[j] = linea[i];
+            }
+            i++;    //salteo la comilla de cierre
+        }
+        else{
+            for(j = 0; !isspace(linea[i]) && k<argc; i++,j++){
+                word[j] = linea[i];
+            }
+        }
+        word[j] = '\0';
+        argv[k] = strdup(word);
+        k++;
+        for(;isspace(linea[i]);i++){
+            ;
+        }
+    }
+    return k;
 }

@@ -1,4 +1,4 @@
-#include <minish.h>
+#include "minish.h"
 
 #define HELP_CD      "cd [..|dir] - cambia de directorio corriente"
 #define HELP_DIR     "dir [str]- muestra archivos en directorio corriente, que tengan 'str'"
@@ -31,4 +31,10 @@ struct builtin_struct builtin_arr[] = {
 
 int ejecutar(int argc, char **argv){
     //Condicion con argc?
+    if(builtin_lookup(argv[0]) != NULL){
+        return builtin_lookup(argv[0])->func(argc,argv);
+    }
+    else{
+       return externo(argc, argv);
+    }
 }

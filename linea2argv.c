@@ -18,6 +18,17 @@ int linea2argv(char *linea, __attribute__((unused)) int argc, char **argv)
             pos_argv++;
             *punt_line = '\0';
         }
+
+        else if(*punt_line == '"' && word ==1){    // Aca empieza la parte de las comillas
+            punt_line++;
+            word = 0;
+            while (*punt_line != '"')
+            {
+                argv[pos_argv] = punt_line;
+                punt_line++;
+            }    
+        }                                         // Aca termina la parte de las comillas
+
         else if (*punt_line != ' ' && word == 1)
         {
             word = 0;

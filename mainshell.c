@@ -10,6 +10,8 @@
 #include <signal.h>
 #include <ctype.h>
 
+#include <limits.h>
+
 #define MAXLINE 1024
 
 void
@@ -25,8 +27,8 @@ sigint_handler(int signum) {                    // the handler for SIGINT
 
 int
 main(int argc, char *argv[]) {
+    char cwd[MAXLINE];
     char line[MAXLINE];
-    char *progname = argv[0];
     struct sigaction oldact, newact;
     char **argv2=malloc(sizeof(char*)*MAXLINE);
     
@@ -35,7 +37,8 @@ main(int argc, char *argv[]) {
     sigaction(SIGINT, &newact, NULL);           // set SIGINT handler for loop
 
     for (;;) {
-        prompt(progname);
+        getcwd(cwd, sizeof(cwd));
+        prompt(cwd);
         if (fgets(line, MAXLINE, stdin) == NULL) {  // EOF
             // ============== NEW CODE HERE ==============
             if (feof(stdin)) {
@@ -89,6 +92,6 @@ main(int argc, char *argv[]) {
     }
 
     fputc('\n', stderr);
-    fprintf(stderr, "Exiting %s ...\n", progname);
+    fprintf(stderr, "Exiting %s ...\n", cwd);
     exit(EXIT_SUCCESS);
 }

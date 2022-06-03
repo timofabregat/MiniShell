@@ -2,6 +2,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include <ctype.h>
+#include <errno.h>
+#include <error.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <signal.h>
+#include <limits.h>
 
 #define MAXLINE 1024        // tamaño máximo de la línea de entrada
 #define MAXCWD 1024         // tamaño máximo para alojar el pathname completo del directorio corriente

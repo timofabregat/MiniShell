@@ -30,7 +30,6 @@ struct builtin_struct builtin_arr[] = {
 };
 
 int ejecutar(int argc, char **argv){
-    //Condicion con argc?
     if(builtin_lookup(argv[0]) != NULL){
         return builtin_lookup(argv[0])->func(argc,argv);
     }

@@ -8,5 +8,5 @@ struct builtin_struct *builtin_lookup(char *cmd){
             return builtin;
         }
     }
-    return builtin;
+    return NULL;
 }

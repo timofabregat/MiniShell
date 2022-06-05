@@ -1,5 +1,11 @@
 #include "minish.h"
 
 int builtin_pid (int argc, char ** argv){
-    return 0;
+    if(argc == 1){
+        printf("Process ID: %d\n", getpid());
+        return 0;
+    }
+    else{
+        return -1; //Completar error
+    }
 };

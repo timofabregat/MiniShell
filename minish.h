@@ -20,6 +20,7 @@ struct builtin_struct {         // struct con información de los builtins
 // Variables que deben definirse en el main como externas
 
 extern int globalstatret;	// guarda status del ultimo comando
+extern char PWD[MAXCWD];
 
 extern struct builtin_struct builtin_arr[];
 

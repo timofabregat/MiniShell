@@ -27,7 +27,7 @@ sigint_handler(int signum) {                    // the handler for SIGINT
 
 int
 main(int argc, char *argv[]) {
-    char cwd[MAXLINE];
+    char cwd[MAXCWD];
     char line[MAXLINE];
     struct sigaction oldact, newact;
     char **argv2=malloc(sizeof(char*)*MAXLINE);

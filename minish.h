@@ -87,3 +87,4 @@ extern int ejecutar (int argc, char ** argv);
 extern int externo (int argc, char ** argv);
 extern int linea2argv(char *linea, int argc, char **argv);
 extern void display_prompt_msg(void);
+extern int esNumero(char *argv);

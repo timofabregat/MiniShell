@@ -7,7 +7,8 @@ int globalstatret = 0;
 void
 prompt(char *ps) {
     // ps is the prompt string
-    fprintf(stderr, "(%s) ^D to exit > ", ps);
+    fprintf(stderr, "%s", ps);
+    display_prompt_msg();
 }
 
 void
@@ -20,7 +21,6 @@ main(int argc, char *argv[]) {
     char cwd[MAXCWD];
     char line[MAXLINE];
     struct sigaction oldact, newact;
-    char **argv2=malloc(sizeof(char*)*MAXLINE);
     
     sigaction(SIGINT, NULL, &newact);           // the  previous action for SIGINT is saved in oldact
     newact.sa_handler = sigint_handler;
@@ -37,9 +37,15 @@ main(int argc, char *argv[]) {
                 continue;   // not EOF, read system call was interrupted, continue loop
             }
         }
+        char **argv2=malloc(sizeof(char*)*MAXLINE);
         argc = linea2argv(line, MAXLINE, argv2);
         if(argc > 0){
             globalstatret = ejecutar(argc,argv2);
+            for(int i =0; argv2[i] != NULL; ++i){
+                free(argv2[i]);
+                //argv[i];
+            }
+            //free(argv2);
         }
     }
     fputc('\n', stderr);

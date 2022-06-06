@@ -6,11 +6,6 @@
 #include <ctype.h>
 
 int linea2argv(char *linea, int argc, char **argv){
-    
-    for(int i =0; argv[i] != NULL; i++){
-        free(argv[i]);
-        argv[i];
-    }
 
     int i = 0,j = 0,k = 0;
     char word[MAXLINE];

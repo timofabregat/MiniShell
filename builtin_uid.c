@@ -1,8 +1,6 @@
 #include "minish.h"
-#include <pwd.h>
 
 int builtin_uid (int argc, char ** argv){
-
     if(argc == 1){
         struct passwd *pws;
         int id = geteuid();
@@ -10,7 +8,6 @@ int builtin_uid (int argc, char ** argv){
         printf("User ID: %d\nUsername: %s\n",id, pws->pw_name);
         return 0;
     }
-
     else{
         return -1; //Error
     }

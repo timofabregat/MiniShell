@@ -12,7 +12,8 @@ int builtin_help(int argc, char ** argv){
     else if(argc == 2){
         builtin = builtin_lookup(argv[1]);
         if (builtin == NULL){
-            printf("Comando no existe en libreria.\n");
+            printf("\033[1;31m");
+            error(EXIT_SUCCESS,0,"\033[31mComando no existe en librearia\033[0m");
             return -1;
         }
         else{
@@ -21,6 +22,7 @@ int builtin_help(int argc, char ** argv){
         }
     }
     else{
-        return -1; //COMPLETAR CON ERROR
+        error(EXIT_SUCCESS,0,"Demasiados Argumentos."); //COMPLETAR CON ERROR
+        return -1;
     }
 }

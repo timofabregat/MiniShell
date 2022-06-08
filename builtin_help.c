@@ -2,6 +2,8 @@
 
 int builtin_help(int argc, char ** argv){
     struct builtin_struct *builtin = NULL;
+
+    // Si el comando es solo help, devolvemos todas las funcionalidades
     if (argc == 1){
         for (builtin = builtin_arr; builtin->cmd != NULL; builtin++)
         {
@@ -9,6 +11,8 @@ int builtin_help(int argc, char ** argv){
         }
         return 0;
     }
+
+    // Si el comando es help[built-in], chequeamos si existe y devolvemos su funcionalidad o un error
     else if(argc == 2){
         builtin = builtin_lookup(argv[1]);
         if (builtin == NULL){
@@ -21,8 +25,11 @@ int builtin_help(int argc, char ** argv){
             return 0;
         }
     }
+
+    // El built-in no soporta mas de dos argumentos
     else{
-        error(EXIT_SUCCESS,0,"Demasiados Argumentos."); //COMPLETAR CON ERROR
+        printf("\033[1;31m");
+        error(EXIT_SUCCESS,0,"\033[31mDemasiados Argumentos\033[0m"); 
         return -1;
     }
 }

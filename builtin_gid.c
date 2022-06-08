@@ -10,7 +10,11 @@ int builtin_gid (int argc, char ** argv){
         }
         return 0;
     }
+
+    //built-in no soporta mas de un argumento
     else{
-        return -1; //Completar error
+        printf("\033[1;31m");
+        error(EXIT_SUCCESS,0,"\033[31mDemasiados Argumentos\033[0m");
+        return -1; 
     }
 };

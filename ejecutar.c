@@ -1,5 +1,6 @@
 #include "minish.h"
 
+//Se definen los textos de informacion
 #define HELP_CD      "cd [..|dir]            - cambia de directorio corriente"
 #define HELP_DIR     "dir [str]              - muestra archivos en directorio corriente, que tengan 'str'"
 #define HELP_EXIT    "exit [status]          - finaliza el minish con un status de retorno (por defecto 0)"
@@ -13,6 +14,7 @@
 #define HELP_GID     "gid                    - muestra el grupo principal y los grupos secundarios del usuario."     //completar
 #define HELP_UNSETENV "unsetenv var [var...]  - elimina variables de ambiente."       //completar 
 
+//Array de informacion de Built-ins
 struct builtin_struct builtin_arr[] = {
     { "cd", builtin_cd, HELP_CD },
     { "dir", builtin_dir, HELP_DIR},
@@ -29,6 +31,7 @@ struct builtin_struct builtin_arr[] = {
     { NULL, NULL, NULL}
 };
 
+//Se chequea si la funcion llamada es un built o externa para ser ejecutadas
 int ejecutar(int argc, char **argv){
     if(builtin_lookup(argv[0]) != NULL){
         return builtin_lookup(argv[0])->func(argc,argv);

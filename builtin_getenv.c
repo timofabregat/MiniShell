@@ -13,6 +13,7 @@ int builtin_getenv (int argc, char ** argv){
             else{
                 printf("\033[1;31m");
                 error(EXIT_SUCCESS,0,"\033[31mNo Existe la variable de ambiente para: %s\033[0m",argv[i]);
+                return -1;
             }
         }
         return 0;

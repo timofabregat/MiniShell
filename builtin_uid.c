@@ -9,13 +9,13 @@ int builtin_uid (int argc, char ** argv){
         int id = geteuid();
         pws = getpwuid(id);
         printf("User ID: %d\nUsername: %s\n",id,pws->pw_name);
-        return 0;
+        return EXIT_SUCCESS;
     }
 
     //Built-in no soporta mas de un argumento
     else{
         printf("\033[1;31m");
         error(EXIT_SUCCESS,0,"\033[31mDemasiados Argumentos\033[0m");
-        return -1; 
+        return EXIT_FAILURE; 
     }
 };

@@ -1,5 +1,5 @@
 #include "minish.h"
 
 int builtin_history (int argc, char ** argv){
-    return 0;
+    return EXIT_SUCCESS;
 };

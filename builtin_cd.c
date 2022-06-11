@@ -8,7 +8,7 @@ int builtin_cd (int argc, char ** argv){
     if(argc == 1){
         getcwd(PWD,sizeof(PWD));
         chdir(getenv("HOME"));
-        return 0;
+        return EXIT_SUCCESS;
     }
 
     else{
@@ -18,7 +18,7 @@ int builtin_cd (int argc, char ** argv){
             getcwd(temp,sizeof(temp));
             chdir(PWD);
             strcpy(PWD,temp);
-            return 0;
+            return EXIT_SUCCESS;
         }
 
         //Si se utiliza un pathname se llama a chdir con el pathname y se chequea si existe el directorio
@@ -28,7 +28,7 @@ int builtin_cd (int argc, char ** argv){
             if(x != 0){
                 printf("\033[1;31m");
                 error(EXIT_SUCCESS,0,"\033[31mDirectorio no existe\033[0m");
-                return -1;
+                return EXIT_FAILURE;
             }
         }
     }
@@ -37,6 +37,6 @@ int builtin_cd (int argc, char ** argv){
     if(argc > 2){
         printf("\033[1;31m");
         error(EXIT_SUCCESS,0,"\033[31mDemasiados Argumentos\033[0m");
-        return -1;
+        return EXIT_FAILURE;
     }
 };

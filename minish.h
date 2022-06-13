@@ -17,6 +17,8 @@
 #define MAXWORDS 256        // cantidad máxima de palabras en la línea
 #define HISTORY_FILE	".minish_history"   // nombre del archivo que almacena historia de comandos
 
+extern FILE *fPtr;
+
 // Definición de Estructuras
 
 struct builtin_struct {         // struct con información de los builtins
@@ -88,3 +90,4 @@ extern int externo (int argc, char ** argv);
 extern int linea2argv(char *linea, int argc, char **argv);
 extern void display_prompt_msg(void);
 extern int esNumero(char *argv);
+extern int counter(FILE *fPtr);

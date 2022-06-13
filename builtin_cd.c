@@ -1,6 +1,7 @@
 #include "minish.h"
 #include <limits.h>
 char PWD[MAXCWD];
+FILE *fPtr;
 int builtin_cd (int argc, char ** argv){
     char temp[MAXCWD];
 
@@ -8,6 +9,11 @@ int builtin_cd (int argc, char ** argv){
     if(argc == 1){
         getcwd(PWD,sizeof(PWD));
         chdir(getenv("HOME"));
+
+        fPtr = fopen(HISTORY_FILE, "w");
+        fputs("cd\n",fPtr);
+        fclose(fPtr);
+
         return 0;
     }
 
@@ -18,6 +24,11 @@ int builtin_cd (int argc, char ** argv){
             getcwd(temp,sizeof(temp));
             chdir(PWD);
             strcpy(PWD,temp);
+
+            fPtr = fopen(HISTORY_FILE, "w");
+            fputs("cd\n",fPtr);
+            fclose(fPtr);
+
             return 0;
         }
 
@@ -30,6 +41,12 @@ int builtin_cd (int argc, char ** argv){
                 error(EXIT_SUCCESS,0,"\033[31mDirectorio no existe\033[0m");
                 return -1;
             }
+
+            fPtr = fopen(HISTORY_FILE, "w");
+            fputs("cd\n",fPtr);
+            fclose(fPtr);
+
+            return 0;
         }
     }
 

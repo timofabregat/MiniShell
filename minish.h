@@ -11,6 +11,10 @@
 #include <limits.h>
 #include <grp.h>
 #include <pwd.h>
+#include <sys/types.h>
+#include <dirent.h>
+#include <libgen.h>
+#include <sys/stat.h>
 
 #define MAXLINE 1024        // tamaño máximo de la línea de entrada
 #define MAXCWD 1024         // tamaño máximo para alojar el pathname completo del directorio corriente

@@ -9,12 +9,16 @@ int builtin_cd (int argc, char ** argv){
     if(argc == 1){
         getcwd(PWD,sizeof(PWD));
         chdir(getenv("HOME"));
+<<<<<<< HEAD
 
         fPtr = fopen(HISTORY_FILE, "w");
         fputs("cd\n",fPtr);
         fclose(fPtr);
 
         return 0;
+=======
+        return EXIT_SUCCESS;
+>>>>>>> 8f5f5e0444082fc71c97f04461d5fc7843f75999
     }
 
     else{
@@ -24,12 +28,16 @@ int builtin_cd (int argc, char ** argv){
             getcwd(temp,sizeof(temp));
             chdir(PWD);
             strcpy(PWD,temp);
+<<<<<<< HEAD
 
             fPtr = fopen(HISTORY_FILE, "w");
             fputs("cd\n",fPtr);
             fclose(fPtr);
 
             return 0;
+=======
+            return EXIT_SUCCESS;
+>>>>>>> 8f5f5e0444082fc71c97f04461d5fc7843f75999
         }
 
         //Si se utiliza un pathname se llama a chdir con el pathname y se chequea si existe el directorio
@@ -39,7 +47,7 @@ int builtin_cd (int argc, char ** argv){
             if(x != 0){
                 printf("\033[1;31m");
                 error(EXIT_SUCCESS,0,"\033[31mDirectorio no existe\033[0m");
-                return -1;
+                return EXIT_FAILURE;
             }
 
             fPtr = fopen(HISTORY_FILE, "w");
@@ -54,6 +62,6 @@ int builtin_cd (int argc, char ** argv){
     if(argc > 2){
         printf("\033[1;31m");
         error(EXIT_SUCCESS,0,"\033[31mDemasiados Argumentos\033[0m");
-        return -1;
+        return EXIT_FAILURE;
     }
 };

@@ -3,7 +3,7 @@
 //Se definen los textos de informacion
 #define HELP_CD      "cd [..|dir]            - cambia de directorio corriente"
 #define HELP_DIR     "dir [str]              - muestra archivos en directorio corriente, que tengan 'str'"
-#define HELP_EXIT    "exit [status]          - finaliza el minish con un status de retorno (por defecto 0)"
+#define HELP_EXIT    "exit [status]          - finaliza el minish con un status de retorno (por defecto el status del último comando)"
 #define HELP_HELP    "help [built-in]        - Muestra el pantalla la funcionalidad del built-in sleccionado"
 #define HELP_HISTORY "history [N]            - muestra los últimos N (10) comandos escritos"
 #define HELP_GETENV  "getenv var [var]       - muestra valor de variable(s) de ambiente"

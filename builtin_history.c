@@ -24,6 +24,7 @@ int counter(FILE *fPtr){
 }
 
 int builtin_history (int argc, char ** argv){
+<<<<<<< HEAD
     fPtr = fopen(HISTORY_FILE,"r");
 
     int i = 0;
@@ -56,4 +57,7 @@ int builtin_history (int argc, char ** argv){
     
     fclose(fPtr);
     return 0;
+=======
+    return EXIT_SUCCESS;
+>>>>>>> 8f5f5e0444082fc71c97f04461d5fc7843f75999
 };

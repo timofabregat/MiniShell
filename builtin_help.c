@@ -9,7 +9,7 @@ int builtin_help(int argc, char ** argv){
         {
             printf("%s\n",builtin->help_txt);
         }
-        return 0;
+        return EXIT_SUCCESS;
     }
 
     // Si el comando es help[built-in], chequeamos si existe y devolvemos su funcionalidad o un error
@@ -18,11 +18,11 @@ int builtin_help(int argc, char ** argv){
         if (builtin == NULL){
             printf("\033[1;31m");
             error(EXIT_SUCCESS,0,"\033[31mComando no existe en librearia\033[0m");
-            return -1;
+            return EXIT_FAILURE;
         }
         else{
             printf("%s\n",builtin->help_txt);
-            return 0;
+            return EXIT_SUCCESS;
         }
     }
 
@@ -30,6 +30,6 @@ int builtin_help(int argc, char ** argv){
     else{
         printf("\033[1;31m");
         error(EXIT_SUCCESS,0,"\033[31mDemasiados Argumentos\033[0m"); 
-        return -1;
+        return EXIT_FAILURE;
     }
 }

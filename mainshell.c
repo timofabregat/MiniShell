@@ -3,6 +3,11 @@
 #define MAXLINE 1024
 
 int globalstatret = 0;
+int list_size = 0;
+struct Node *head = NULL;
+struct Node *curr = NULL;
+
+FILE *fPtr;
 
 void
 prompt(char *ps) {
@@ -39,6 +44,8 @@ main(int argc, char *argv[]) {
         }
         char **argv2=malloc(sizeof(char*)*MAXLINE);
         argc = linea2argv(line, MAXLINE, argv2);
+        insert(line);
+        list_size++;
         if(argc > 0){
             globalstatret = ejecutar(argc,argv2);
             for(int i =0; argv2[i] != NULL; ++i){
@@ -48,6 +55,20 @@ main(int argc, char *argv[]) {
             //free(argv2);
         }
     }
+    getcwd(PWD,sizeof(PWD));
+    chdir(getenv("HOME"));
+    fPtr = fopen(HISTORY_FILE,"a");
+    
+    reverse(&head);
+
+    struct Node *pointer = head;
+    while(pointer != NULL){
+        fprintf(fPtr, "%s",pointer->data);
+        pointer = pointer -> next;
+    }
+    fclose(fPtr);
+    chdir(PWD);
+    
     fputc('\n', stderr);
     fprintf(stderr, "Exiting %s ...\n", cwd);
     exit(EXIT_SUCCESS);

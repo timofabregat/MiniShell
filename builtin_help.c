@@ -9,6 +9,7 @@ int builtin_help(int argc, char ** argv){
         {
             printf("%s\n",builtin->help_txt);
         }
+
         return EXIT_SUCCESS;
     }
 

@@ -2,62 +2,104 @@
 
 FILE *fPtr;
 
-int counter(FILE *fPtr){
 
-    int count = 0;
-
-    char c;
-
-    fopen(HISTORY_FILE,"r");
-
-    c = getc(fPtr);
-
-    while(c != NULL){
-        if(c == '\n'){
-            count = count +1;
-        }
-        c = getc(fPtr);
-    }
-
-    fclose(fPtr);
-    return count;
-}
+int list_size2 = 0;
 
 int builtin_history (int argc, char ** argv){
-<<<<<<< HEAD
-    fPtr = fopen(HISTORY_FILE,"r");
 
-    int i = 0;
-
-    /*fPtr = fopen(".minish_history","r");
-    const unsigned MAX_LENGTH = 256;
-    char buffer[MAX_LENGTH];
-    while (fgets(buffer,MAX_LENGTH, fPtr))
-    {
-        printf("%s",buffer);
-    }*/
-
+    //retornar 10 comandos
     if(argc == 1){
-        int x = counter(fPtr);
-        printf("%d",x);
-        int imp = x - 10;
-
-        const unsigned MAX_LENGTH = 256;
-        char buffer[MAX_LENGTH];
-        while (fgets(buffer,MAX_LENGTH, fPtr) && i <= x)
-        {   
-            printf("ENTRE");
-            if(i >= imp){
-              printf("%s",buffer);  
+        
+        if(list_size >= 10){
+            struct Node *pointer = head;
+            for(int i=0;i<10;i++){
+                printf("%s",pointer->data);
+                pointer = pointer ->next;
             }
-            i++;
+            return 0;
+        }
+
+        else{
+            struct Node *pointer = head;
+            for(int i=0;i<list_size;i++){
+                printf("%s",pointer->data);
+                pointer = pointer ->next;
+            }
+
+            getcwd(PWD,sizeof(PWD));
+            chdir(getenv("HOME"));
+            fPtr = fopen(HISTORY_FILE, "r");
+            
+            int cnt = 10-list_size;
+            char str[1024];
+            while(fgets(str,1024,fPtr) != NULL){
+                insert2(str);
+                list_size2++;
+            }
+
+            struct Node *pointer2 = curr;
+            for(int i=0;i<cnt && i < list_size2;i++){
+                printf("%s",pointer2->data);
+                pointer2 = pointer2 ->next;
+            }
+
+            chdir(PWD);
+            return 0;
         }
 
     }
-    
-    fclose(fPtr);
-    return 0;
-=======
-    return EXIT_SUCCESS;
->>>>>>> 8f5f5e0444082fc71c97f04461d5fc7843f75999
+
+    else if (argc == 2){
+        if(esNumero(argv[1])){
+            int x = atoi(argv[1]);
+            
+            if(list_size >= x){
+                struct Node *pointer = head;
+                for(int i=0;i<x;i++){
+                    printf("%s",pointer->data);
+                    pointer = pointer ->next;
+                }
+                return 0;
+            }
+
+            else{
+                struct Node *pointer = head;
+                for(int i =0; i<list_size;i++){
+                    printf("%s",pointer->data);
+                    pointer = pointer ->next;
+                }
+
+                getcwd(PWD,sizeof(PWD));
+                chdir(getenv("HOME"));
+                fPtr = fopen(HISTORY_FILE, "r");
+
+                int cnt = x - list_size;
+                char str[1024];
+                while(fgets(str,1014,fPtr) != NULL){
+                    insert2(str);
+                    list_size2++;
+                }    
+
+                struct Node *pointer2 = curr;
+                for(int i=0;i<cnt && i < list_size2;i++){
+                    printf("%s",pointer2->data);
+                    pointer2 = pointer2 ->next;
+                }
+
+                chdir(PWD);
+                return 0;                
+            }
+        }
+        else{
+            printf("\033[1;31m");
+            error(EXIT_SUCCESS,0,"\033[31mArgumento no valido\033[0m");
+            return EXIT_FAILURE;
+        }
+    }
+
+    else{
+        printf("\033[1;31m");
+        error(EXIT_SUCCESS,0,"\033[31mDemasiados Argumentos\033[0m"); 
+        return EXIT_FAILURE;
+    }
 };

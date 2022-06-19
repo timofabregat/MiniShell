@@ -5,8 +5,7 @@ FILE *fPtr;
 
 int list_size2 = 0;
 
-// Se entiende que se podria usar una funcion aux para insertar en lista
-// Existen mejoras, no se elimina la lista despues del history, es decir cada vez que se llama se inserta en la lista repetidamente todo el historial
+// Se entiende que se podria usar una funcion aux para printear las listas
 int builtin_history (int argc, char ** argv){
 
     //retornar 10 comandos

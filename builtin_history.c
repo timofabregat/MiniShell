@@ -18,7 +18,7 @@ int builtin_history (int argc, char ** argv){
                 pointer = pointer ->next;
             }
             printf("\n");
-            return 0;
+            return EXIT_SUCCESS;
         }
 
         else{ //Sino se llega con los locales, insertar en lista los restantes del historial y printearlos
@@ -48,7 +48,7 @@ int builtin_history (int argc, char ** argv){
             chdir(PWD);
             printf("\n");
             deleteList();
-            return 0;
+            return EXIT_SUCCESS;
         }
 
     }
@@ -64,7 +64,7 @@ int builtin_history (int argc, char ** argv){
                     pointer = pointer ->next;
                 }
                 printf("\n");
-                return 0;
+                return EXIT_SUCCESS;
             }
 
             else{ // Sino buscar meter restantes en lista del historial y printearlos 
@@ -93,7 +93,7 @@ int builtin_history (int argc, char ** argv){
                 printf("\n");
                 deleteList();
                 chdir(PWD);
-                return 0;                
+                return EXIT_SUCCESS;                
             }
         }
         else{

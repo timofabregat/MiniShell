@@ -12,8 +12,7 @@ FILE *fPtr;
 void
 prompt(char *ps) {
     // ps is the prompt string
-    fprintf(stderr, "%s", ps);
-    display_prompt_msg();
+    fprintf(stderr, "%s > ", ps);
 }
 
 void

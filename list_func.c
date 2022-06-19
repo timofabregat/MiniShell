@@ -45,3 +45,16 @@ void reverse(struct Node** head){
 
     *head = prev; 
 }
+
+void deleteList(){
+    struct Node* act = curr;
+    struct Node* next;
+
+    while(act != NULL){
+        next = act->next;
+        free(act);
+        act = next;
+    }
+
+    curr = NULL;
+}

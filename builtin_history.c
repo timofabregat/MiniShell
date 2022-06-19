@@ -5,21 +5,24 @@ FILE *fPtr;
 
 int list_size2 = 0;
 
+// Se entiende que se podria usar una funcion aux para insertar en lista
+// Existen mejoras, no se elimina la lista despues del history, es decir cada vez que se llama se inserta en la lista repetidamente todo el historial
 int builtin_history (int argc, char ** argv){
 
     //retornar 10 comandos
     if(argc == 1){
         
-        if(list_size >= 10){
+        if(list_size >= 10){ //Revisar si da con los locales
             struct Node *pointer = head;
             for(int i=0;i<10;i++){
                 printf("%s",pointer->data);
                 pointer = pointer ->next;
             }
+            printf("\n");
             return 0;
         }
 
-        else{
+        else{ //Sino se llega con los locales, insertar en lista los restantes del historial y printearlos
             struct Node *pointer = head;
             for(int i=0;i<list_size;i++){
                 printf("%s",pointer->data);
@@ -44,25 +47,28 @@ int builtin_history (int argc, char ** argv){
             }
 
             chdir(PWD);
+            printf("\n");
+            deleteList();
             return 0;
         }
 
     }
 
     else if (argc == 2){
-        if(esNumero(argv[1])){
+        if(esNumero(argv[1])){ // chequear si es numero
             int x = atoi(argv[1]);
             
-            if(list_size >= x){
+            if(list_size >= x){ // Revisar si da con los locales
                 struct Node *pointer = head;
                 for(int i=0;i<x;i++){
                     printf("%s",pointer->data);
                     pointer = pointer ->next;
                 }
+                printf("\n");
                 return 0;
             }
 
-            else{
+            else{ // Sino buscar meter restantes en lista del historial y printearlos 
                 struct Node *pointer = head;
                 for(int i =0; i<list_size;i++){
                     printf("%s",pointer->data);
@@ -85,7 +91,8 @@ int builtin_history (int argc, char ** argv){
                     printf("%s",pointer2->data);
                     pointer2 = pointer2 ->next;
                 }
-
+                printf("\n");
+                deleteList();
                 chdir(PWD);
                 return 0;                
             }

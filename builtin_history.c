@@ -3,7 +3,7 @@
 FILE *fPtr;
 
 
-int list_size2 = 0;
+int list_size2 = 0; // tamano lista utilizada para printear historial remoto
 /*Notar que su uso una estructura de lista enlazada estilo stack para almacenar los comandos locales
   temporalmente antes de escribirlos en el archivo. Adicionalmente se utiliza otra lista para poder traer el archivo
   .minish_history y printearlo de ser necesario.

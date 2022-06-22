@@ -11,6 +11,11 @@
 #include <limits.h>
 #include <grp.h>
 #include <pwd.h>
+#include <sys/types.h>
+#include <dirent.h>
+#include <libgen.h>
+#include <sys/stat.h>
+#include <time.h>
 
 #define MAXLINE 1024        // tamaño máximo de la línea de entrada
 #define MAXCWD 1024         // tamaño máximo para alojar el pathname completo del directorio corriente
@@ -88,3 +93,6 @@ extern int externo (int argc, char ** argv);
 extern int linea2argv(char *linea, int argc, char **argv);
 extern void display_prompt_msg(void);
 extern int esNumero(char *argv);
+extern void permisos(struct stat *fs);
+extern void alfasort(char **files);
+extern int listpaths(char *path, char *filter, char **names);

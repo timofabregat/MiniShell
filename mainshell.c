@@ -56,9 +56,9 @@ main(int argc, char *argv[]) {
             globalstatret = ejecutar(argc,argv2); //Status del minish
             for(int i =0; argv2[i] != NULL; ++i){ // Se libera el array donde tenemos los argumentos a leer para comandos
                 free(argv2[i]);
-                //argv[i];
+                
             }
-            //free(argv2);
+            
         }
     } 
     /* Una vez finalizado vamos al home para acceder al arhcibo historial, hacemos un reverse de la lista

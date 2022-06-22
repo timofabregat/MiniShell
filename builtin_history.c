@@ -95,7 +95,7 @@ int builtin_history (int argc, char ** argv){
                     pointer2 = pointer2 ->next;
                 }
                 printf("\n");
-                deleteList();
+                deleteList(); //Elimino lista utilizada para printear historial remoto
                 chdir(PWD);
                 return EXIT_SUCCESS;                
             }

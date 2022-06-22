@@ -99,7 +99,9 @@ extern int ejecutar (int argc, char ** argv);
 extern int externo (int argc, char ** argv);
 extern int linea2argv(char *linea, int argc, char **argv);
 extern int esNumero(char *argv);
-extern int counter(FILE *fPtr);
+
+
+
 extern void insert(char* data);
 extern void insert2(char* data);
 extern void print_list(struct Node* head);

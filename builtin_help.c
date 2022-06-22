@@ -3,7 +3,7 @@
 int builtin_help(int argc, char ** argv){
     struct builtin_struct *builtin = NULL;
 
-    // Si el comando es solo help, devolvemos todas las funcionalidades
+    // Si el comando es solo help, devolvemos todas las funcionalidades recorriendo su almacenamiento y devolviendo los atributos de la estructura
     if (argc == 1){
         for (builtin = builtin_arr; builtin->cmd != NULL; builtin++)
         {
@@ -13,7 +13,7 @@ int builtin_help(int argc, char ** argv){
         return EXIT_SUCCESS;
     }
 
-    // Si el comando es help[built-in], chequeamos si existe y devolvemos su funcionalidad o un error
+    // Si el comando es help[built-in], chequeamos si existe en el arrat y devolvemos su atributo o un error
     else if(argc == 2){
         builtin = builtin_lookup(argv[1]);
         if (builtin == NULL){

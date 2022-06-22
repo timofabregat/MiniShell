@@ -4,14 +4,17 @@ FILE *fPtr;
 
 
 int list_size2 = 0;
-
+/*Notar que su uso una estructura de lista enlazada estilo stack para almacenar los comandos locales
+  temporalmente antes de escribirlos en el archivo. Adicionalmente se utiliza otra lista para poder traer el archivo
+  .minish_history y printearlo de ser necesario.
+*/
 // Se entiende que se podria usar una funcion aux para printear las listas
 int builtin_history (int argc, char ** argv){
 
     //retornar 10 comandos
     if(argc == 1){
         
-        if(list_size >= 10){ //Revisar si da con los locales
+        if(list_size >= 10){ //Revisar si da con los comandos locales
             struct Node *pointer = head;
             for(int i=0;i<10;i++){
                 printf("%s",pointer->data);
@@ -21,7 +24,8 @@ int builtin_history (int argc, char ** argv){
             return EXIT_SUCCESS;
         }
 
-        else{ //Sino se llega con los locales, insertar en lista los restantes del historial y printearlos
+        else{ //Sino se llega con los locales, insertar en lista los restantes del historial y printearlos luego de los locales
+              //Tener en cuenta que para acceder al archivo .minish_history se debe ir al home del ambiente.
             struct Node *pointer = head;
             for(int i=0;i<list_size;i++){
                 printf("%s",pointer->data);
@@ -57,7 +61,7 @@ int builtin_history (int argc, char ** argv){
         if(esNumero(argv[1])){ // chequear si es numero
             int x = atoi(argv[1]);
             
-            if(list_size >= x){ // Revisar si da con los locales
+            if(list_size >= x){ // Revisar si da con los comandos locales
                 struct Node *pointer = head;
                 for(int i=0;i<x;i++){
                     printf("%s",pointer->data);
@@ -67,7 +71,7 @@ int builtin_history (int argc, char ** argv){
                 return EXIT_SUCCESS;
             }
 
-            else{ // Sino buscar meter restantes en lista del historial y printearlos 
+            else{ // Sino buscar meter restantes en lista del historial y printearlos luego de printear los locales
                 struct Node *pointer = head;
                 for(int i =0; i<list_size;i++){
                     printf("%s",pointer->data);
@@ -97,6 +101,7 @@ int builtin_history (int argc, char ** argv){
             }
         }
         else{
+            //No se especifica un numero
             printf("\033[1;31m");
             error(EXIT_SUCCESS,0,"\033[31mArgumento no valido\033[0m");
             return EXIT_FAILURE;
@@ -104,6 +109,7 @@ int builtin_history (int argc, char ** argv){
     }
 
     else{
+        //Se utilizan mas de dos argumentos
         printf("\033[1;31m");
         error(EXIT_SUCCESS,0,"\033[31mDemasiados Argumentos\033[0m"); 
         return EXIT_FAILURE;

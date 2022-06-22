@@ -1,5 +1,9 @@
 #include "minish.h"
 
+//Funciones auxiliares de la lista/stack
+//Se entiende que se pudo haber mergeado los dos inserts para atender a las diferentes listas
+//delete list se utilizara para limpiar la lista historial del archivo una vez que sea utilizada
+// Reverse se utiliza para dar vuelta el stack/lista para que sea ingesado al archivo en orden
 void insert(char* data){
     struct Node *link = (struct Node*)malloc(sizeof(struct Node));
 

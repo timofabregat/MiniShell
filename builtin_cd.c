@@ -5,7 +5,7 @@ int builtin_cd(int argc, char ** argv)
 {
     char temp[MAXCWD];
 
-    //Si se llama solo cd se llama a la funcion chdir con la variable HOME
+    //Si se llama solo cd se llama a la funcion chdir con la variable de ambiente HOME
     if(argc == 1){
         getcwd(PWD,sizeof(PWD));
         chdir(getenv("HOME"));

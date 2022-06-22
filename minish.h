@@ -20,7 +20,9 @@
 #define MAXLINE 1024        // tamaño máximo de la línea de entrada
 #define MAXCWD 1024         // tamaño máximo para alojar el pathname completo del directorio corriente
 #define MAXWORDS 256        // cantidad máxima de palabras en la línea
-#define HISTORY_FILE	".minish_history"   // nombre del archivo que almacena historia de comandos
+#define HISTORY_FILE	".minish_history"   // nombre del archivo que almacena historia de comandos  $HOME/.minish_history
+
+extern FILE *fPtr;
 
 // Definición de Estructuras
 
@@ -29,6 +31,16 @@ struct builtin_struct {         // struct con información de los builtins
     int (*func) (int, char **); // la función que lo ejecuta
     char *help_txt;             // el texto de ayuda
 };
+
+extern struct Node{
+    char data[20];
+    struct Node* next;
+    struct Node* prev;
+} Node;
+
+extern struct Node *head;
+extern struct Node *curr;
+extern int list_size;
 
 
 // Variables que deben definirse en el main como externas
@@ -91,8 +103,15 @@ extern int builtin_unsetenv (int argc, char ** argv);
 extern int ejecutar (int argc, char ** argv);
 extern int externo (int argc, char ** argv);
 extern int linea2argv(char *linea, int argc, char **argv);
-extern void display_prompt_msg(void);
 extern int esNumero(char *argv);
 extern void permisos(struct stat *fs);
 extern void alfasort(char **files);
 extern int listpaths(char *path, char *filter, char **names);
+
+
+
+extern void insert(char* data);
+extern void insert2(char* data);
+extern void print_list(struct Node* head);
+extern void reverse(struct Node** head);
+extern void deleteList();

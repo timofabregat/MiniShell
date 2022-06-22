@@ -2,7 +2,7 @@
 
 int builtin_pid (int argc, char ** argv){
 
-    //Se encuentra el process id y se devuelve
+    //Se encuentra el process id y se devuelve a traves del comando getpid()
     if(argc == 1){
         printf("Process ID: %d\n", getpid());
         return EXIT_SUCCESS;

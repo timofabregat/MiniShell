@@ -1,13 +1,15 @@
 #include "minish.h"
 #include <limits.h>
 char PWD[MAXCWD];
-int builtin_cd (int argc, char ** argv){
+int builtin_cd(int argc, char ** argv)
+{
     char temp[MAXCWD];
 
-    //Si se llama solo cd se llama a la funcion chdir con la variable HOME
+    //Si se llama solo cd se llama a la funcion chdir con la variable de ambiente HOME
     if(argc == 1){
         getcwd(PWD,sizeof(PWD));
         chdir(getenv("HOME"));
+        return 0;
         return EXIT_SUCCESS;
     }
 
@@ -18,7 +20,11 @@ int builtin_cd (int argc, char ** argv){
             getcwd(temp,sizeof(temp));
             chdir(PWD);
             strcpy(PWD,temp);
+
+            return 0;
+
             return EXIT_SUCCESS;
+
         }
 
         //Si se utiliza un pathname se llama a chdir con el pathname y se chequea si existe el directorio
@@ -30,6 +36,8 @@ int builtin_cd (int argc, char ** argv){
                 error(EXIT_SUCCESS,0,"\033[31mDirectorio no existe\033[0m");
                 return EXIT_FAILURE;
             }
+
+            return 0;
         }
     }
 
@@ -39,4 +47,4 @@ int builtin_cd (int argc, char ** argv){
         error(EXIT_SUCCESS,0,"\033[31mDemasiados Argumentos\033[0m");
         return EXIT_FAILURE;
     }
-};
+}

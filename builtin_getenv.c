@@ -3,9 +3,9 @@
 int builtin_getenv (int argc, char ** argv){
     //Se busca el built in con getenv, si existe si devuelve el valor
     if(argc > 1){
-        for(int i = 1; i < argc; i++){
+        for(int i = 1; i < argc; i++){  // Por si se utiliza una lista de variables
             char *env;
-            env = getenv(argv[i]);
+            env = getenv(argv[i]); // Busco la variable indicada
             if(env != NULL){
                 printf("%s = %s\n",argv[i],env);
             }

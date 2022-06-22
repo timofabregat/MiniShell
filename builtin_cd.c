@@ -7,8 +7,8 @@ int builtin_cd(int argc, char ** argv)
 
     //Si se llama solo cd se llama a la funcion chdir con la variable de ambiente HOME
     if(argc == 1){
-        getcwd(PWD,sizeof(PWD));
-        chdir(getenv("HOME"));
+        getcwd(PWD,sizeof(PWD)); // Almaceno directorio corriente
+        chdir(getenv("HOME")); //obtengo variable home y muevo a ese directorio con chdir
         return 0;
         return EXIT_SUCCESS;
     }
@@ -17,9 +17,9 @@ int builtin_cd(int argc, char ** argv)
 
         //Si se llama cd - se llama a la funcion chdir con la variable aux del pathname pasado
         if(strcmp(argv[1],"-") == 0){
-            getcwd(temp,sizeof(temp));
-            chdir(PWD);
-            strcpy(PWD,temp);
+            getcwd(temp,sizeof(temp)); // Almaceno directorio corriente
+            chdir(PWD); //Esta variable almacena el directorio previo
+            strcpy(PWD,temp); // Cambio el directorio previo
 
             return 0;
 
@@ -29,7 +29,7 @@ int builtin_cd(int argc, char ** argv)
 
         //Si se utiliza un pathname se llama a chdir con el pathname y se chequea si existe el directorio
         else{
-            getcwd(PWD,sizeof(PWD));
+            getcwd(PWD,sizeof(PWD)); //Almaceno directorio corriente
             int x = chdir(argv[1]);
             if(x != 0){
                 printf("\033[1;31m");

@@ -5,10 +5,10 @@ int builtin_uid (int argc, char ** argv){
     /*Se busca el id de usuario, se encuentra el password asociado al id
      y a su vez el nombre de usuario asociado al password*/
     if(argc == 1){
-        struct passwd *pws;
-        int id = geteuid();
-        pws = getpwuid(id);
-        printf("User ID: %d\nUsername: %s\n",id,pws->pw_name);
+        struct passwd *pws; 
+        int id = geteuid(); //se encuentra la contrasena
+        pws = getpwuid(id); //se encuentra la password asociada
+        printf("User ID: %d\nUsername: %s\n",id,pws->pw_name); //se printeo el nombre asosciada a las password
         return EXIT_SUCCESS;
     }
 

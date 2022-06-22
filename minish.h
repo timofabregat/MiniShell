@@ -32,21 +32,20 @@ struct builtin_struct {         // struct con información de los builtins
     char *help_txt;             // el texto de ayuda
 };
 
-extern struct Node{
+extern struct Node{   //Structura de stack/lista utilizada
     char data[20];
     struct Node* next;
-    struct Node* prev;
 } Node;
 
-extern struct Node *head;
-extern struct Node *curr;
+extern struct Node *head; //lista de historial local
+extern struct Node *curr; //lista utilizada para printear historial remoto
 extern int list_size;
 
 
 // Variables que deben definirse en el main como externas
 
 extern int globalstatret;	// guarda status del ultimo comando
-extern char PWD[MAXCWD];
+extern char PWD[MAXCWD];   //Variable utilizada para almacenar directorios corrientes
 
 extern struct builtin_struct builtin_arr[];
 

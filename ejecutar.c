@@ -31,7 +31,7 @@ struct builtin_struct builtin_arr[] = {
     { NULL, NULL, NULL}
 };
 
-//Se chequea si la funcion llamada es un built o externa para ser ejecutadas
+//Se chequea si la funcion llamada es un built o externa para ser ejecutadas y retorna el estado correspondiente
 int ejecutar(int argc, char **argv){
     if(builtin_lookup(argv[0]) != NULL){
         return builtin_lookup(argv[0])->func(argc,argv);

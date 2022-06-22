@@ -12,18 +12,14 @@ FILE *fPtr;
 void
 prompt(char *ps) {
     // ps is the prompt string
-    // Se encuentra elusuario para luego printear el path
+    // Se encuentra el usuario para luego printear el path
     int j =0;
 
-    struct passwd *pws;
+    struct passwd *pws; 
     int id = geteuid();
-    pws = getpwuid(id);
+    pws = getpwuid(id); //se obtiene passord asociada al usuario
 
-    /*for(int i =5; ps[i] != '\0';i++,j++){
-        ps[j] = ps[i];
-    }
-    ps[j] = '\0';*/
-    fprintf(stderr, "%s:%s > ", pws->pw_name,ps);
+    fprintf(stderr, "%s:%s > ", pws->pw_name,ps); //se imprime el path en conjunto con el usuario
 }
 
 void
@@ -68,19 +64,19 @@ main(int argc, char *argv[]) {
     /* Una vez finalizado vamos al home para acceder al arhcibo historial, hacemos un reverse de la lista
        y al recorrerla la vamos insertando a dicho arhivo
     */
-    getcwd(PWD,sizeof(PWD));
-    chdir(getenv("HOME"));
-    fPtr = fopen(HISTORY_FILE,"a");
+    getcwd(PWD,sizeof(PWD)); //se guarda el directorio corriente
+    chdir(getenv("HOME"));  //Voy al dir home para utilizar el archivo .minish_history
+    fPtr = fopen(HISTORY_FILE,"a"); //Abro el archivo en formato append
     
-    reverse(&head);
+    reverse(&head);  //Doy vueta la lista para ingresar los comandos en orden necesario
 
     struct Node *pointer = head;
     while(pointer != NULL){
-        fprintf(fPtr, "%s",pointer->data);
-        pointer = pointer -> next;
+        fprintf(fPtr, "%s",pointer->data); //Imprimo en archivo el nodo actual
+        pointer = pointer -> next; //Avanzo de nodo
     }
-    fclose(fPtr);
-    chdir(PWD);
+    fclose(fPtr); //cierro Archivo
+    chdir(PWD); //Retorno a dir corriente
     
     fputc('\n', stderr);
     fprintf(stderr, "Exiting %s ...\n", cwd);

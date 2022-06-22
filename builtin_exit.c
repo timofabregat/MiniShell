@@ -9,8 +9,8 @@ int builtin_exit (int argc, char ** argv){
 
     //Si se especifica un status, se chequea si es valido y se termina el programa
     else if(argc == 2){
-        if(esNumero(argv[1])){
-            int x = atoi(argv[1]);
+        if(esNumero(argv[1])){        //chequeo si es numero
+            int x = atoi(argv[1]);    // Transformo a int el string
             exit(x);
         }
         else{

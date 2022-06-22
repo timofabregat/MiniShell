@@ -6,7 +6,7 @@ struct builtin_struct *builtin_lookup(char *cmd){
     // Se recorre el array de built-ins para encontrar el especificado
     for (builtin = builtin_arr; builtin->cmd != NULL; builtin++)
     {
-        if(strcmp(builtin->cmd, cmd) == 0){
+        if(strcmp(builtin->cmd, cmd) == 0){  //si encuentro lo retorno
             return builtin;
         }
     }

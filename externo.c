@@ -30,6 +30,6 @@ int externo(int argc, char ** argv){
         waitpid(pid, &wait_status, 0);
         sigaction(SIGINT, &oldact, NULL);   // restore SIGINT when child finishes
         fprintf(stderr, "Ended child process %s\n",argv[0]);
-        return WEXITSTATUS(wait_status);
+        return WEXITSTATUS(wait_status); //Devolvemos estado correspdondiente
     }
 };

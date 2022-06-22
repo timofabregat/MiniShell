@@ -94,4 +94,5 @@ extern int linea2argv(char *linea, int argc, char **argv);
 extern void display_prompt_msg(void);
 extern int esNumero(char *argv);
 extern void permisos(struct stat *fs);
+extern void alfasort(char **files);
 extern int listpaths(char *path, char *filter, char **names);

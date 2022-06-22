@@ -107,9 +107,6 @@ extern int esNumero(char *argv);
 extern void permisos(struct stat *fs);
 extern void alfasort(char **files);
 extern int listpaths(char *path, char *filter, char **names);
-
-
-
 extern void insert(char* data);
 extern void insert2(char* data);
 extern void print_list(struct Node* head);

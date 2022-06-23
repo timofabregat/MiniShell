@@ -102,7 +102,7 @@ int builtin_history (int argc, char ** argv){
         }
         else{
             //No se especifica un numero
-            printf("\033[1;31m");
+            printf(RED);
             error(EXIT_SUCCESS,0,"\033[31mArgumento no valido\033[0m");
             return EXIT_FAILURE;
         }
@@ -110,7 +110,7 @@ int builtin_history (int argc, char ** argv){
 
     else{
         //Se utilizan mas de dos argumentos
-        printf("\033[1;31m");
+        printf(RED);
         error(EXIT_SUCCESS,0,"\033[31mDemasiados Argumentos\033[0m"); 
         return EXIT_FAILURE;
     }

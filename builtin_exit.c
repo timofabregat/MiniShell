@@ -14,7 +14,7 @@ int builtin_exit (int argc, char ** argv){
             exit(x);
         }
         else{
-            printf("\033[1;31m");
+            printf(RED);
             error(EXIT_SUCCESS,0,"\033[31mArgumento no valido\033[0m");
             return EXIT_FAILURE;
         }
@@ -22,7 +22,7 @@ int builtin_exit (int argc, char ** argv){
 
     //Argumentos no validos
     else{
-        printf("\033[1;31m");
+        printf(RED);
         error(EXIT_SUCCESS,0,"\033[31mDemasiados Argumentos\033[0m");
         return EXIT_FAILURE;
     }

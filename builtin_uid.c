@@ -14,7 +14,7 @@ int builtin_uid (int argc, char ** argv){
 
     //Built-in no soporta mas de un argumento
     else{
-        printf("\033[1;31m");
+        printf(RED);
         error(EXIT_SUCCESS,0,"\033[31mDemasiados Argumentos\033[0m");
         return EXIT_FAILURE; 
     }

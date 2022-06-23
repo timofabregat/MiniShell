@@ -10,7 +10,7 @@ int builtin_getenv (int argc, char ** argv){
                 printf("%s = %s\n",argv[i],env);
             }
             else{
-                printf("\033[1;31m");
+                printf(RED);
                 error(EXIT_SUCCESS,0,"\033[31mNo Existe la variable de ambiente %s\033[0m",argv[i]);
                 return EXIT_FAILURE;
             }
@@ -20,7 +20,7 @@ int builtin_getenv (int argc, char ** argv){
     
     //argumentos no validos para built in
     else{
-        printf("\033[1;31m");
+        printf(RED);
         error(EXIT_SUCCESS,0,"\033[31mFaltan argumentos\033[0m");
         return EXIT_FAILURE;
     }

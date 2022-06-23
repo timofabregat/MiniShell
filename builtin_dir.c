@@ -8,7 +8,7 @@ int builtin_dir(int argc, char **argv){
     files = malloc(sizeof(char *)*1000);
     if(argc == 1){                                  
         if(listpaths("./", NULL, files) != 0){                  //En caso de tener solo dir, listo los archivos de mi directorio actual
-            printf("\033[1;31m");
+            printf(RED);
             error(EXIT_SUCCESS,0,"\033[31mError al leer el directorio actual\033[0m");
             return EXIT_FAILURE; 
         }
@@ -16,7 +16,7 @@ int builtin_dir(int argc, char **argv){
     else if(argc == 2){
         if(listpaths(argv[1], NULL, files) != 0){          //En caso de tener dir arg[1] chequeo si este ultimo es un directorio
             if(listpaths("./", argv[1], files) != 0){          //Si no lo es, busco en mi directorio actual los archivos que contenga en su nombre argv[1] y los imprimo
-                printf("\033[1;31m");
+                printf(RED);
                 error(EXIT_SUCCESS,0,"\033[31mError al leer el archivo\033[0m");
                 return EXIT_FAILURE; 
             }
@@ -24,13 +24,13 @@ int builtin_dir(int argc, char **argv){
     }
     else if(argc == 3){
         if(listpaths(argv[1], argv[2], files) != 0){           //En este caso, tengo argv[1] que debe ser un directorio y argv[2] que es la palabra a buscar entre los archivos
-            printf("\033[1;31m");
+            printf(RED);
             error(EXIT_SUCCESS,0,"\033[31mEl primer argumento no es un directorio valido\033[0m");
             return EXIT_FAILURE; 
         }
     }
     else {
-        printf("\033[1;31m");                                       //Para más argumentos error
+        printf(RED);                                       //Para más argumentos error
         error(EXIT_SUCCESS,0,"\033[31mDemasiados Argumentos\033[0m");
         return EXIT_FAILURE; 
     }

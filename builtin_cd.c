@@ -32,7 +32,7 @@ int builtin_cd(int argc, char ** argv)
             getcwd(PWD,sizeof(PWD)); //Almaceno directorio corriente
             int x = chdir(argv[1]);
             if(x != 0){
-                printf("\033[1;31m");
+                printf(RED);
                 error(EXIT_SUCCESS,0,"\033[31mDirectorio no existe\033[0m");
                 return EXIT_FAILURE;
             }
@@ -43,7 +43,7 @@ int builtin_cd(int argc, char ** argv)
 
     //Built-in no soporta mas argumentos, igual siempre se agarra el error de directorio no existe antes
     if(argc > 2){
-        printf("\033[1;31m");
+        printf(RED);
         error(EXIT_SUCCESS,0,"\033[31mDemasiados Argumentos\033[0m");
         return EXIT_FAILURE;
     }

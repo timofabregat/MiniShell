@@ -10,7 +10,7 @@ int builtin_status (int argc, char ** argv){
 
     //Built-in no soporta mas argumentos
     else{
-        printf("\033[1;31m");
+        printf(RED);
         error(EXIT_SUCCESS,0,"\033[31mDemasiados Argumentos\033[0m");
         return EXIT_FAILURE;
     }

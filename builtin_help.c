@@ -17,7 +17,7 @@ int builtin_help(int argc, char ** argv){
     else if(argc == 2){
         builtin = builtin_lookup(argv[1]); //Busco comando en particular
         if (builtin == NULL){
-            printf("\033[1;31m");
+            printf(RED);
             error(EXIT_SUCCESS,0,"\033[31mComando no existe en librearia\033[0m");
             return EXIT_FAILURE;
         }
@@ -29,7 +29,7 @@ int builtin_help(int argc, char ** argv){
 
     // El built-in no soporta mas de dos argumentos
     else{
-        printf("\033[1;31m");
+        printf(RED);
         error(EXIT_SUCCESS,0,"\033[31mDemasiados Argumentos\033[0m"); 
         return EXIT_FAILURE;
     }

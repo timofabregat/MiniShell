@@ -47,6 +47,9 @@ extern int list_size;
 
 extern int globalstatret;	// guarda status del ultimo comando
 extern char PWD[MAXCWD];   //Variable utilizada para almacenar directorios corrientes
+extern char file[MAXLINE][MAXLINE];
+extern char *dir_path;
+extern DIR *dir;
 
 extern struct builtin_struct builtin_arr[];
 
@@ -104,7 +107,6 @@ extern int ejecutar (int argc, char ** argv);
 extern int externo (int argc, char ** argv);
 extern int linea2argv(char *linea, int argc, char **argv);
 extern int esNumero(char *argv);
-extern void permisos(struct stat *fs);
 extern void alfasort(char **files);
 extern int listpaths(char *path, char *filter, char **names);
 extern void insert(char* data);
@@ -112,3 +114,7 @@ extern void insert2(char* data);
 extern void print_list();
 extern void reverse(struct Node** head);
 extern void deleteList();
+extern void sort(int l, char file[MAXLINE][MAXLINE]);
+extern void perm_file(int n);
+extern int len_file(char *busco,char *pwd);
+extern int print_dir(int len);

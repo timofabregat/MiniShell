@@ -32,7 +32,7 @@ int builtin_history (int argc, char ** argv){
                 printf("%s",pointer->data); //printeo cada nodo
                 pointer = pointer ->next;   //avanzo un nodo
             }
-            printf("\n");
+            //printf("\n");
             deleteList();
             //printf("borre\n");
             list_size2 = 0;
@@ -53,18 +53,16 @@ int builtin_history (int argc, char ** argv){
                     pointer2 = pointer2 ->next;
                 }
                 deleteList();
-                //printf("borre\n");
                 list_size2 =0;
                 return EXIT_SUCCESS;
             }
             else{
                 struct Node *pointer2 = curr;
-                for(int i=0;i < list_size2;i++){
+                for(int i=0;i < list_size2-1;i++){
                     printf("%s",pointer2->data);
                     pointer2 = pointer2 ->next;
                 }
                 deleteList();
-                //printf("borre\n");
                 list_size2 = 0;
                 return EXIT_SUCCESS;
             }
@@ -107,7 +105,7 @@ int builtin_history (int argc, char ** argv){
                 }
                 else{
                     struct Node *pointer2 = curr;
-                    for(int i=0;i < list_size2;i++){
+                    for(int i=0;i < list_size2-1;i++){
                         printf("%s",pointer2->data);
                         pointer2 = pointer2 ->next;
                     }

@@ -17,7 +17,7 @@ prompt(char *ps) {
 
     struct passwd *pws; 
     int id = geteuid();
-    pws = getpwuid(id); //se obtiene passord asociada al usuario
+    pws = getpwuid(id); //se obtiene password asociada al usuario
 
     fprintf(stderr, "%s:%s > ", pws->pw_name,ps); //se imprime el path en conjunto con el usuario
 }
@@ -53,7 +53,7 @@ main(int argc, char *argv[]) {
         insert(line); // En esta linea se carga el comando a la lista local para luego ser cargada al archivo una vez finalizado el minish
         list_size++; //Aumentamos el tamano de lista/stack
         if(argc > 0){
-            globalstatret = ejecutar(argc,argv2); //Status del minish
+            globalstatret = ejecutar(argc,argv2); //Status del minish y llamo a ejecutar
             for(int i =0; argv2[i] != NULL; ++i){ // Se libera el array donde tenemos los argumentos a leer para comandos
                 free(argv2[i]);
                 

@@ -2,7 +2,7 @@
 
 int builtin_status (int argc, char ** argv){
 
-    //Si se llama, se devuelve la variable globa/ambiente de status
+    //Si se llama, se devuelve la variable global/ambiente de status
     if(argc == 1){
         printf("Ultimo status: %d\n", globalstatret);
         return EXIT_SUCCESS;

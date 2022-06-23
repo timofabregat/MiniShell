@@ -1,7 +1,7 @@
 #include "minish.h"
 
 int builtin_getenv (int argc, char ** argv){
-    //Se busca el built in con getenv, si existe si devuelve el valor
+    //Se busca el built in con getenv, si existe se devuelve el valor
     if(argc > 1){
         for(int i = 1; i < argc; i++){  // Por si se utiliza una lista de variables
             char *env;
@@ -11,7 +11,7 @@ int builtin_getenv (int argc, char ** argv){
             }
             else{
                 printf(RED);
-                error(EXIT_SUCCESS,0,"\033[31mNo Existe la variable de ambiente %s\033[0m",argv[i]);
+                error(EXIT_SUCCESS,0,"\033[31mNo Existe la variable de ambiente %s\033[0m",argv[i]);        //Si no se encontro la variable error
                 return EXIT_FAILURE;
             }
         }

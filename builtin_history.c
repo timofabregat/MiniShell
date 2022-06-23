@@ -11,6 +11,18 @@ int list_size2 = 0; // tamano lista utilizada para printear historial remoto
 // Se entiende que se podria usar una funcion aux para printear las listas
 int builtin_history (int argc, char ** argv){
 
+    getcwd(PWD,sizeof(PWD)); //guardo dir corriente
+    chdir(getenv("HOME"));   //debo entrar al directorio home para utilizar el archivo
+    fPtr = fopen(HISTORY_FILE, "r"); //abro el archivo en read
+
+    char str[2048];
+    while(fgets(str,2048,fPtr)){
+        insert2(str);
+        list_size2++;
+    }
+    //fclose(fPtr);
+    chdir(PWD);
+
     //retornar 10 comandos
     if(argc == 1){
         
@@ -21,38 +33,41 @@ int builtin_history (int argc, char ** argv){
                 pointer = pointer ->next;   //avanzo un nodo
             }
             printf("\n");
+            deleteList();
+            //printf("borre\n");
+            list_size2 = 0;
             return EXIT_SUCCESS;
         }
-
-        else{ //Sino se llega con los locales, insertar en lista los restantes del historial y printearlos luego de los locales
-              //Tener en cuenta que para acceder al archivo .minish_history se debe ir al home del ambiente.
+        else{
             struct Node *pointer = head;
-            for(int i=0;i<list_size;i++){ //printeo locales
-                printf("%s",pointer->data);
-                pointer = pointer ->next;
+            for(int i=0;i<list_size;i++){ //recorro local
+                printf("%s",pointer->data); //printeo cada nodo
+                pointer = pointer ->next;   //avanzo un nodo
             }
 
-            getcwd(PWD,sizeof(PWD)); //guardo dir corriente
-            chdir(getenv("HOME"));   //debo entrar al directorio home para utilizar el archivo
-            fPtr = fopen(HISTORY_FILE, "r"); //abro el archivo en read
-            
-            int cnt = 10-list_size;   //calculo cuantos adicionales debo printear
-            char str[1024];
-            while(fgets(str,1024,fPtr) != NULL){ //cargo archivo, se entiende que se podria reducir la carga
-                insert2(str);
-                list_size2++;
+            if(list_size2 + list_size >10){
+                int cnt = 10-list_size;
+                struct Node *pointer2 = curr;
+                for(int i=0;i<cnt && i < list_size2;i++){
+                    printf("%s",pointer2->data);
+                    pointer2 = pointer2 ->next;
+                }
+                deleteList();
+                //printf("borre\n");
+                list_size2 =0;
+                return EXIT_SUCCESS;
             }
-
-            struct Node *pointer2 = curr;
-            for(int i=0;i<cnt && i < list_size2;i++){ //printeo los necesarios de la lista del archivo
-                printf("%s",pointer2->data);
-                pointer2 = pointer2 ->next;
+            else{
+                struct Node *pointer2 = curr;
+                for(int i=0;i < list_size2;i++){
+                    printf("%s",pointer2->data);
+                    pointer2 = pointer2 ->next;
+                }
+                deleteList();
+                //printf("borre\n");
+                list_size2 = 0;
+                return EXIT_SUCCESS;
             }
-
-            chdir(PWD); //vuelvo al directorio corriente
-            printf("\n");
-            deleteList();
-            return EXIT_SUCCESS;
         }
 
     }
@@ -60,44 +75,46 @@ int builtin_history (int argc, char ** argv){
     else if (argc == 2){
         if(esNumero(argv[1])){ // chequear si es numero
             int x = atoi(argv[1]); //transformo a int el string
+            //printf("este es ek numero de comandos: %d\n Lista local %d\n Lista remoto %d\n",x, list_size,list_size2);
             
-            if(list_size >= x){ // Revisar si da con los comandos locales
+            if(list_size >= x){
                 struct Node *pointer = head;
-                for(int i=0;i<x;i++){ //recorro hasta necesario
-                    printf("%s",pointer->data); //printeo cada nodo
+                for(int i =0; i<x && i<list_size;i++){
+                    printf("%s",pointer->data);
                     pointer = pointer ->next;
                 }
-                printf("\n");
+                deleteList();
+                list_size2 = 0;
                 return EXIT_SUCCESS;
             }
-
-            else{ // Sino buscar meter restantes en lista del historial y printearlos luego de printear los locales
+            else{
                 struct Node *pointer = head;
-                for(int i =0; i<list_size;i++){ //printeo locales
+                for(int i =0; i<x && i<list_size;i++){
                     printf("%s",pointer->data);
                     pointer = pointer ->next;
                 }
 
-                getcwd(PWD,sizeof(PWD)); //guardo dir corriente
-                chdir(getenv("HOME"));   //cambio de dir para utilizar el archivo .minish_history
-                fPtr = fopen(HISTORY_FILE, "r"); //
-
-                int cnt = x - list_size; //calculo restantes
-                char str[1024];
-                while(fgets(str,1014,fPtr) != NULL){ //cargo archivo a lista
-                    insert2(str);
-                    list_size2++;
-                }    
-
-                struct Node *pointer2 = curr;
-                for(int i=0;i<cnt && i < list_size2;i++){ //printeo restantes
-                    printf("%s",pointer2->data);
-                    pointer2 = pointer2 ->next;
+                if(list_size2+list_size > x){
+                    int cnt = x - list_size;
+                    struct Node *pointer2 = curr;
+                    for(int i=0;i<cnt && i < list_size2;i++){
+                        printf("%s",pointer2->data);
+                        pointer2 = pointer2 ->next;
+                    }
+                    deleteList();
+                    list_size2 =0;
+                    return EXIT_SUCCESS;
                 }
-                printf("\n");
-                deleteList(); //Elimino lista utilizada para printear historial remoto
-                chdir(PWD);
-                return EXIT_SUCCESS;                
+                else{
+                    struct Node *pointer2 = curr;
+                    for(int i=0;i < list_size2;i++){
+                        printf("%s",pointer2->data);
+                        pointer2 = pointer2 ->next;
+                    }
+                    deleteList();
+                    list_size2 = 0;
+                    return EXIT_SUCCESS;
+                }
             }
         }
         else{

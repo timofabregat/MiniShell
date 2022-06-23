@@ -24,15 +24,13 @@ void insert2(char* data){
     curr = link;
 }
 
-void print_list(struct Node* head){
-    struct Node *pointer = head;
-    printf("[");
+void print_list(){
+    struct Node *pointer = curr;
 
     while(pointer != NULL){
-        printf("(%s),",pointer->data);
+        printf("%s",pointer->data);
         pointer = pointer -> next;
     }
-    printf("]\n");
 }
 
 void reverse(struct Node** head){

@@ -109,6 +109,6 @@ extern void alfasort(char **files);
 extern int listpaths(char *path, char *filter, char **names);
 extern void insert(char* data);
 extern void insert2(char* data);
-extern void print_list(struct Node* head);
+extern void print_list();
 extern void reverse(struct Node** head);
 extern void deleteList();
